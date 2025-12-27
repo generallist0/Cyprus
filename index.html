@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кипр - Остров Солнца и Древностей</title>
+    <title>Кипр | Остров Солнца и Античности</title>
+    <meta name="description" content="Кипр - одна из лучших стран мира: полная информация о стране, климате, ценах, достопримечательностях">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ========== БАЗОВЫЕ СТИЛИ ========== */
         * {
             margin: 0;
             padding: 0;
@@ -14,26 +16,38 @@
         }
 
         :root {
-            --primary: #00b4d8;
-            --primary-dark: #0077b6;
-            --secondary: #ff9e00;
-            --dark-bg: #0d1321;
-            --dark-card: #1d2d44;
-            --text: #f0ebd8;
-            --text-secondary: #b8b8b8;
-            --glass-bg: rgba(30, 45, 70, 0.7);
+            /* Цветовая палитра моря и солнца */
+            --primary: #00a8ff;
+            --primary-dark: #0097e6;
+            --primary-light: #89c4f4;
+            --secondary: #fbc531;
+            --dark-bg: #0c2461;
+            --darker-bg: #0a1931;
+            --card-bg: #1a2980;
+            --text: #ffffff;
+            --text-secondary: #d1d8e0;
+            --accent: #4cd137;
+            --danger: #e84118;
+            
+            /* Glass эффекты */
+            --glass-bg: rgba(26, 41, 128, 0.7);
             --glass-border: rgba(255, 255, 255, 0.1);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            
+            /* Тени */
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--dark-bg);
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(0, 180, 216, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(255, 158, 0, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
         }
 
         .container {
@@ -42,21 +56,32 @@
             padding: 0 20px;
         }
 
-        /* Стили для эффекта жидкого стекла */
+        section {
+            padding: 100px 0;
+        }
+
+        /* ========== GLASS ЭФФЕКТ ========== */
         .glass {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
+            border-radius: 15px;
             border: 1px solid var(--glass-border);
             box-shadow: var(--shadow);
+            padding: 30px;
         }
 
-        /* Шапка сайта */
-        header {
-            padding: 30px 0;
-            position: relative;
-            z-index: 100;
+        /* ========== ШАПКА ========== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 25, 49, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2);
         }
 
         .header-content {
@@ -69,6 +94,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            text-decoration: none;
         }
 
         .logo-icon {
@@ -86,73 +112,137 @@
         .logo-text {
             font-size: 28px;
             font-weight: 800;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        nav ul {
+        .nav-list {
             display: flex;
             list-style: none;
             gap: 30px;
         }
 
-        nav a {
+        .nav-link {
             color: var(--text);
             text-decoration: none;
             font-weight: 600;
-            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 25px;
             transition: all 0.3s;
-            padding: 8px 15px;
-            border-radius: 50px;
         }
 
-        nav a:hover {
-            color: var(--primary);
-            background: rgba(0, 180, 216, 0.1);
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
         }
 
-        /* Герой секция */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ========== ГЕРОЙ ========== */
         .hero {
-            padding: 80px 0;
+            padding-top: 150px;
+            text-align: center;
+            background: linear-gradient(rgba(10, 25, 49, 0.9), rgba(10, 25, 49, 0.9));
             position: relative;
-            margin-bottom: 80px;
         }
 
-        .hero-content {
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* ========== СЕКЦИИ С ТЕКСТОМ И ФОТО ========== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-light);
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .content-block {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
+            margin-bottom: 80px;
         }
 
-        .hero-text h1 {
-            font-size: 48px;
+        .content-block.reverse {
+            direction: rtl;
+        }
+
+        .content-block.reverse .text-content,
+        .content-block.reverse .image-content {
+            direction: ltr;
+        }
+
+        .text-content h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
             margin-bottom: 20px;
-            line-height: 1.2;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
         }
 
-        .hero-text p {
-            font-size: 20px;
-            margin-bottom: 30px;
+        .text-content p {
             color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
         }
 
-        .hero-image {
-            position: relative;
+        .feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-list li i {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .image-content {
+            text-align: center;
         }
 
         .image-frame {
             width: 100%;
             height: 400px;
-            border-radius: 30px;
+            border-radius: 15px;
             overflow: hidden;
-            position: relative;
+            box-shadow: var(--shadow-lg);
         }
 
         .image-frame img {
@@ -166,315 +256,156 @@
             transform: scale(1.05);
         }
 
-        /* Кнопки */
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 180, 216, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 2px solid var(--primary);
-            margin-left: 15px;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 180, 216, 0.1);
-            transform: translateY(-5px);
-        }
-
-        /* Секции */
-        section {
-            margin-bottom: 100px;
-        }
-
-        .section-title {
-            font-size: 36px;
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 60%;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            bottom: -10px;
-            left: 20%;
-            border-radius: 2px;
-        }
-
-        /* Достопримечательности */
-        .attractions {
+        /* ========== ЦЕНЫ ========== */
+        .price-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            margin-top: 50px;
         }
 
-        .attraction-card {
+        .price-card {
+            background: var(--card-bg);
             padding: 30px;
-            transition: all 0.3s;
-            height: 100%;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
         }
 
-        .attraction-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        .price-card h4 {
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
         }
 
-        .attraction-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 20px;
+        .price-item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: white;
-            margin-bottom: 20px;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .attraction-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--text);
+        .price {
+            color: var(--accent);
+            font-weight: bold;
         }
 
-        .attraction-card p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-
-        /* Информация о стране */
-        .country-info {
+        /* ========== КУХНЯ ========== */
+        .dishes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
+            margin-top: 50px;
         }
 
-        .info-card {
-            padding: 30px;
+        .dish-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
             text-align: center;
+            transition: transform 0.3s;
         }
 
-        .info-card i {
+        .dish-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .dish-icon {
             font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .info-card h3 {
-            font-size: 24px;
+            color: var(--secondary);
             margin-bottom: 15px;
         }
 
-        .info-card p {
-            color: var(--text-secondary);
+        .dish-card h4 {
+            color: var(--primary-light);
+            margin-bottom: 10px;
         }
 
-        /* Галерея */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-item {
-            height: 250px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(13, 19, 33, 0.9), transparent);
-            padding: 20px;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.3s;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Футер */
+        /* ========== ФУТЕР ========== */
         footer {
-            padding: 60px 0 30px;
-            background-color: rgba(13, 19, 33, 0.9);
-            margin-top: 80px;
+            background: var(--darker-bg);
+            padding: 50px 0 20px;
+            border-top: 1px solid rgba(0, 168, 255, 0.2);
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            text-align: center;
             margin-bottom: 40px;
         }
 
-        .footer-column h3 {
-            font-size: 24px;
-            margin-bottom: 25px;
-            color: var(--primary);
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 15px;
-        }
-
-        .footer-column a {
+        .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .footer-column a:hover {
+        .footer-links a:hover {
             color: var(--primary);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--dark-card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text);
-            font-size: 20px;
-            transition: all 0.3s;
-        }
-
-        .social-icons a:hover {
-            background: var(--primary);
-            transform: translateY(-5px);
         }
 
         .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Адаптивность */
-        @media (max-width: 992px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
+        /* ========== АДАПТИВНОСТЬ ========== */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
             }
 
-            .hero-text h1 {
-                font-size: 40px;
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .content-block {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
             .section-title {
-                font-size: 32px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero-text h1 {
-                font-size: 34px;
-            }
-
-            .attractions, .country-info {
-                grid-template-columns: 1fr;
-            }
-
-            .btn {
-                display: block;
-                width: 100%;
-                margin-bottom: 15px;
-                text-align: center;
-            }
-
-            .btn-secondary {
-                margin-left: 0;
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Шапка сайта -->
-    <header>
+    <header class="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <a href="#home" class="logo">
                     <div class="logo-icon">
-                        <i class="fas fa-umbrella-beach"></i>
+                        <i class="fas fa-sun"></i>
                     </div>
                     <div class="logo-text">КИПР</div>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#home">Главная</a></li>
-                        <li><a href="#about">О стране</a></li>
-                        <li><a href="#attractions">Достопримечательности</a></li>
-                        <li><a href="#gallery">Галерея</a></li>
-                        <li><a href="#contact">Контакты</a></li>
+                </a>
+
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active">Главная</a></li>
+                        <li><a href="#about" class="nav-link">О стране</a></li>
+                        <li><a href="#climate" class="nav-link">Климат</a></li>
+                        <li><a href="#prices" class="nav-link">Цены</a></li>
+                        <li><a href="#attractions" class="nav-link">Достопримечательности</a></li>
+                        <li><a href="#cuisine" class="nav-link">Кухня</a></li>
                     </ul>
                 </nav>
             </div>
@@ -484,231 +415,344 @@
     <!-- Главная секция -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Кипр - остров солнца, моря и древностей</h1>
-                    <p>Откройте для себя удивительный мир Кипра: золотые пляжи, античные руины, гостеприимные жители и неповторимую атмосферу Средиземноморья.</p>
-                    <a href="#attractions" class="btn btn-primary">Исследовать достопримечательности</a>
-                    <a href="#about" class="btn btn-secondary">Узнать о стране</a>
+            <h1>КИПР</h1>
+            <p class="hero-subtitle">Остров Солнца · Родина Афродиты · Жемчужина Средиземноморья</p>
+        </div>
+    </section>
+
+    <!-- О стране -->
+    <section id="about" class="container">
+        <h2 class="section-title">О стране</h2>
+        
+        <div class="content-block glass">
+            <div class="text-content">
+                <h3>История и мифология</h3>
+                <p>Кипр - остров с 10-тысячелетней историей, известный как родина древнегреческой богини любви и красоты Афродиты.</p>
+                <p>Согласно мифологии, Афродита родилась из морской пены у берегов Кипра, недалеко от города Пафос.</p>
+                <p>Остров был важным центром древнего мира - его заселяли микенцы, финикийцы, ассирийцы, египтяне, персы.</p>
+                
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Один из древнейших очагов цивилизации</li>
+                    <li><i class="fas fa-check"></i> 10 объектов Всемирного наследия ЮНЕСКО</li>
+                    <li><i class="fas fa-check"></i> Богатое культурное наследие</li>
+                    <li><i class="fas fa-check"></i> Уникальная смесь греческих и восточных традиций</li>
+                </ul>
+            </div>
+            <div class="image-content">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1531157733723-6841323e6d73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Исторические руины Кипра">
                 </div>
-                <div class="hero-image">
-                    <div class="image-frame glass">
-                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Пляж на Кипре">
-                    </div>
+            </div>
+        </div>
+
+        <div class="content-block glass reverse">
+            <div class="text-content">
+                <h3>География и природа</h3>
+                <p>Кипр расположен в восточной части Средиземного моря, являясь третьим по величине островом после Сицилии и Сардинии.</p>
+                <p>Площадь острова - 9 251 км². Рельеф разнообразен: от горных массивов Троодос и Кирения до плодородных равнин и песчаных пляжей.</p>
+                
+                <ul class="feature-list">
+                    <li><i class="fas fa-mountain"></i> Гора Олимп (1952 м) - высочайшая точка</li>
+                    <li><i class="fas fa-tree"></i> Уникальные леса золотого дуба</li>
+                    <li><i class="fas fa-umbrella-beach"></i> 57 пляжей с Голубым флагом</li>
+                    <li><i class="fas fa-fish"></i> Богатый подводный мир</li>
+                </ul>
+            </div>
+            <div class="image-content">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Природа Кипра">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- О стране -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">О стране</h2>
-            <div class="country-info">
-                <div class="info-card glass">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <h3>География</h3>
-                    <p>Кипр - третий по величине остров в Средиземном море, расположенный на перекрестке Европы, Азии и Африки.</p>
+    <!-- Климат -->
+    <section id="climate" class="container">
+        <h2 class="section-title">Климат</h2>
+        
+        <div class="content-block glass">
+            <div class="text-content">
+                <h3>Средиземноморский рай</h3>
+                <p>Кипр обладает одним из самых здоровых климатов в мире по данным Всемирной организации здравоохранения.</p>
+                
+                <h4 style="margin-top: 20px; color: var(--primary-light);">Температура воздуха:</h4>
+                <ul class="feature-list">
+                    <li>Зимой (декабрь-февраль): +15°C до +20°C</li>
+                    <li>Весной (март-май): +20°C до +28°C</li>
+                    <li>Летом (июнь-август): +28°C до +35°C</li>
+                    <li>Осенью (сентябрь-ноябрь): +25°C до +30°C</li>
+                </ul>
+
+                <h4 style="margin-top: 20px; color: var(--primary-light);">Температура моря:</h4>
+                <ul class="feature-list">
+                    <li>Зимой: +16°C до +18°C</li>
+                    <li>Весной: +18°C до +22°C</li>
+                    <li>Летом: +24°C до +28°C</li>
+                    <li>Осенью: +22°C до +26°C</li>
+                </ul>
+            </div>
+            <div class="image-content">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Климат Кипра">
                 </div>
-                <div class="info-card glass">
-                    <i class="fas fa-history"></i>
-                    <h3>История</h3>
-                    <p>Богатая 10-тысячелетняя история: от неолитических поселений до римских, византийских и венецианских памятников.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цены -->
+    <section id="prices" class="container">
+        <h2 class="section-title">Стоимость жизни</h2>
+        
+        <div class="content-block glass">
+            <div class="text-content">
+                <h3>Цены на продукты и услуги</h3>
+                <p>Стоимость жизни на Кипре примерно на 15% ниже, чем в среднем по Европе, при высоком качестве товаров и услуг.</p>
+                
+                <div class="price-grid">
+                    <div class="price-card">
+                        <h4>Продукты питания</h4>
+                        <div class="price-item">
+                            <span>Хлеб</span>
+                            <span class="price">1.50 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Молоко (1л)</span>
+                            <span class="price">1.20 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Яйца (12 шт)</span>
+                            <span class="price">3.00 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Сыр местный (1кг)</span>
+                            <span class="price">8.50 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Фрукты (сезонные)</span>
+                            <span class="price">1-3 €/кг</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Овощи (сезонные)</span>
+                            <span class="price">0.8-2 €/кг</span>
+                        </div>
+                    </div>
+                    
+                    <div class="price-card">
+                        <h4>Общественное питание</h4>
+                        <div class="price-item">
+                            <span>Обед в кафе</span>
+                            <span class="price">12-20 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Ужин в ресторане</span>
+                            <span class="price">25-40 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Кофе в кафе</span>
+                            <span class="price">3.50 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Пиво (0.5л)</span>
+                            <span class="price">4.00 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Вино (бутылка)</span>
+                            <span class="price">8-15 €</span>
+                        </div>
+                    </div>
+                    
+                    <div class="price-card">
+                        <h4>Транспорт и услуги</h4>
+                        <div class="price-item">
+                            <span>Такси (за км)</span>
+                            <span class="price">1.00 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Автобус (билет)</span>
+                            <span class="price">1.50 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Бензин (1л)</span>
+                            <span class="price">1.40 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Коммунальные услуги (мес)</span>
+                            <span class="price">120-200 €</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Интернет (мес)</span>
+                            <span class="price">30-40 €</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="info-card glass">
-                    <i class="fas fa-sun"></i>
-                    <h3>Климат</h3>
-                    <p>Средиземноморский климат с более чем 300 солнечными днями в году делает Кипр идеальным местом для отдыха.</p>
-                </div>
-                <div class="info-card glass">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Кухня</h3>
-                    <p>Кипрская кухня - это смесь греческих, турецких и ближневосточных традиций с акцентом на свежие местные продукты.</p>
+            </div>
+            <div class="image-content">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Рынок на Кипре">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Достопримечательности -->
-    <section id="attractions">
-        <div class="container">
-            <h2 class="section-title">Топ достопримечательностей</h2>
-            <div class="attractions">
-                <div class="attraction-card glass">
-                    <div class="attraction-icon">
-                        <i class="fas fa-archway"></i>
-                    </div>
-                    <h3>Археологический парк Пафоса</h3>
-                    <p>Объект Всемирного наследия ЮНЕСКО с прекрасно сохранившимися римскими мозаиками и древними руинами.</p>
-                    <a href="#" class="btn btn-primary">Подробнее</a>
+    <section id="attractions" class="container">
+        <h2 class="section-title">Главные достопримечательности</h2>
+        
+        <div class="content-block glass">
+            <div class="text-content">
+                <h3>Археологический парк Пафоса</h3>
+                <p>Объект Всемирного наследия ЮНЕСКО с великолепными римскими мозаиками, изображающими сцены из греческой мифологии.</p>
+                <p>Здесь находятся руины древнего города с амфитеатром, виллами, храмами и подземными гробницами.</p>
+                
+                <h4 style="margin-top: 20px; color: var(--primary-light);">Что посмотреть:</h4>
+                <ul class="feature-list">
+                    <li><i class="fas fa-archway"></i> Виллы Диониса, Тесея и Орфея</li>
+                    <li><i class="fas fa-theater-masks"></i> Античный театр Одеон</li>
+                    <li><i class="fas fa-landmark"></i> Колонна апостола Павла</li>
+                    <li><i class="fas fa-chess-board"></i> Уникальные мозаики 3-5 веков</li>
+                </ul>
+            </div>
+            <div class="image-content">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1530073418470-495e6bd5e5a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Археологический парк Пафоса">
                 </div>
-                <div class="attraction-card glass">
-                    <div class="attraction-icon">
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <h3>Горный массив Троодос</h3>
-                    <p>Живописные горные деревушки, византийские церкви с фресками и самый высокий пик острова - гора Олимп.</p>
-                    <a href="#" class="btn btn-primary">Подробнее</a>
-                </div>
-                <div class="attraction-card glass">
-                    <div class="attraction-icon">
-                        <i class="fas fa-umbrella-beach"></i>
-                    </div>
-                    <h3>Пляж Нисси</h3>
-                    <p>Легендарный пляж с белым песком и бирюзовой водой, расположенный в курортном городе Айя-Напа.</p>
-                    <a href="#" class="btn btn-primary">Подробнее</a>
-                </div>
-                <div class="attraction-card glass">
-                    <div class="attraction-icon">
-                        <i class="fas fa-landmark"></i>
-                    </div>
-                    <h3>Кирения (Гирне)</h3>
-                    <p>Очаровательный портовый город на северном побережье с впечатляющей крепостью и живописной гаванью.</p>
-                    <a href="#" class="btn btn-primary">Подробнее</a>
-                </div>
-                <div class="attraction-card glass">
-                    <div class="attraction-icon">
-                        <i class="fas fa-water"></i>
-                    </div>
-                    <h3>Голубая лагуна</h3>
-                    <p>Кристально чистая вода невероятного бирюзового оттенка в бухте у полуострова Акамас.</p>
-                    <a href="#" class="btn btn-primary">Подробнее</a>
-                </div>
-                <div class="attraction-card glass">
-                    <div class="attraction-icon">
-                        <i class="fas fa-church"></i>
-                    </div>
-                    <h3>Монастырь Киккос</h3>
-                    <p>Самый известный и богатый монастырь на Кипре, основанный в XI веке и посвященный Богородице.</p>
-                    <a href="#" class="btn btn-primary">Подробнее</a>
+            </div>
+        </div>
+
+        <div class="content-block glass reverse">
+            <div class="text-content">
+                <h3>Горы Троодос</h3>
+                <p>Крупнейший горный массив Кипра с вершиной Олимп (1952 м). Летом - место для пеших прогулок, зимой - горнолыжный курорт.</p>
+                <p>В горах Троодос находятся 10 византийских церквей и монастырей, включенных в список Всемирного наследия ЮНЕСКО.</p>
+                
+                <h4 style="margin-top: 20px; color: var(--primary-light);">Что посмотреть:</h4>
+                <ul class="feature-list">
+                    <li><i class="fas fa-church"></i> Монастырь Киккос (самый богатый)</li>
+                    <li><i class="fas fa-tree"></i> Древние леса золотого дуба</li>
+                    <li><i class="fas fa-wine-bottle"></i> Винодельни региона</li>
+                    <li><i class="fas fa-hiking"></i> Пешеходные маршруты</li>
+                </ul>
+            </div>
+            <div class="image-content">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1593693399749-55d2bb5e5c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Горы Троодос">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Галерея -->
-    <section id="gallery">
-        <div class="container">
-            <h2 class="section-title">Галерея Кипра</h2>
-            <div class="gallery">
-                <div class="gallery-item glass">
-                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Город Пафос">
-                    <div class="gallery-overlay">
-                        <h4>Город Пафос</h4>
+    <!-- Кухня -->
+    <section id="cuisine" class="container">
+        <h2 class="section-title">Кипрская кухня</h2>
+        
+        <div class="content-block glass">
+            <div class="text-content">
+                <h3>Национальные блюда</h3>
+                <p>Кипрская кухня - это вкусное сочетание греческих, турецких и ближневосточных традиций с акцентом на свежие местные продукты.</p>
+                
+                <div class="dishes-grid">
+                    <div class="dish-card">
+                        <div class="dish-icon">
+                            <i class="fas fa-cheese"></i>
+                        </div>
+                        <h4>Халлуми</h4>
+                        <p>Знаменитый кипрский сыр, который можно жарить на гриле и он не плавится</p>
+                    </div>
+                    
+                    <div class="dish-card">
+                        <div class="dish-icon">
+                            <i class="fas fa-drumstick-bite"></i>
+                        </div>
+                        <h4>Сувлаки</h4>
+                        <p>Мясо на гриле (чаще свинина или курица), подается в пите с овощами</p>
+                    </div>
+                    
+                    <div class="dish-card">
+                        <div class="dish-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h4>Меце</h4>
+                        <p>Набор из 20-30 маленьких блюд, которые подаются одновременно</p>
+                    </div>
+                    
+                    <div class="dish-card">
+                        <div class="dish-icon">
+                            <i class="fas fa-wine-glass-alt"></i>
+                        </div>
+                        <h4>Кипрские вина</h4>
+                        <p>Коммандария - самое древнее вино в мире, производится на Кипре более 3000 лет</p>
                     </div>
                 </div>
-                <div class="gallery-item glass">
-                    <img src="https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Кипрская деревня">
-                    <div class="gallery-overlay">
-                        <h4>Традиционная деревня</h4>
-                    </div>
-                </div>
-                <div class="gallery-item glass">
-                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Замок Колосси">
-                    <div class="gallery-overlay">
-                        <h4>Замок Колосси</h4>
-                    </div>
-                </div>
-                <div class="gallery-item glass">
-                    <img src="https://images.unsplash.com/photo-1593693399749-55d2bb5e5c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Море на Кипре">
-                    <div class="gallery-overlay">
-                        <h4>Кипрское побережье</h4>
-                    </div>
+            </div>
+            <div class="image-content">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Кипрская кухня">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Футер -->
-    <footer id="contact">
+    <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h3>О Кипре</h3>
-                    <p>Кипр — это уникальное сочетание древней истории, средиземноморской культуры и природной красоты.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Быстрые ссылки</h3>
-                    <ul>
-                        <li><a href="#home">Главная</a></li>
-                        <li><a href="#about">О стране</a></li>
-                        <li><a href="#attractions">Достопримечательности</a></li>
-                        <li><a href="#gallery">Галерея</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Никосия, Кипр</li>
-                        <li><i class="fas fa-phone"></i> +357 22 123456</li>
-                        <li><i class="fas fa-envelope"></i> info@cyprus-travel.com</li>
-                    </ul>
-                </div>
+                <h3>Кипр - жемчужина Средиземноморья</h3>
+                <p>Остров с богатейшей историей, кристально чистым морем и гостеприимными жителями</p>
             </div>
+            
+            <div class="footer-links">
+                <a href="#about">О стране</a>
+                <a href="#climate">Климат</a>
+                <a href="#prices">Цены</a>
+                <a href="#attractions">Достопримечательности</a>
+                <a href="#cuisine">Кухня</a>
+            </div>
+            
             <div class="copyright">
-                <p>&copy; 2023 Кипр - Остров Солнца и Древностей. Все права защищены.</p>
+                <p>© 2024 Сайт о Кипре. Создано при помощи DeepSeek & generallisto. Все права защищены.</p>
+                <p>Информация предоставлена для ознакомления. Фотографии взяты из открытых источников.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Плавная прокрутка к якорям
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+        // Мобильное меню
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav').style.display = 
+                document.querySelector('.nav').style.display === 'block' ? 'none' : 'block';
         });
 
-        // Добавление эффекта параллакса для шапки
+        // Активное меню
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
         window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const header = document.querySelector('header');
+            let current = '';
             
-            if (scrolled > 100) {
-                header.style.background = 'rgba(13, 19, 33, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-            } else {
-                header.style.background = 'transparent';
-                header.style.backdropFilter = 'none';
-                header.style.boxShadow = 'none';
-            }
-        });
-
-        // Анимация появления элементов при скролле
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
                 }
             });
-        }, observerOptions);
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
 
-        // Наблюдаем за элементами, которые нужно анимировать
-        document.querySelectorAll('.attraction-card, .info-card, .gallery-item').forEach(el => {
-            observer.observe(el);
+        // Закрытие меню при клике на ссылку
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.nav').style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
